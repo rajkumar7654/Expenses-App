@@ -24,7 +24,7 @@ app.use('/user', signUpRoute);
 app.use('/user', loginRoute);
 
 
-sequelize.sync().then(() => {
+sequelize.sync({ force: false }).then(() => {
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     });
