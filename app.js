@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const loginRoute = require('./routes/loginRoute');
 const signUpRoute = require('./routes/signUpRoute');
-
+const dashboardRoute = require('./routes/dashboardRoute');
 //data base 
 const sequelize = require('./utils/db-connection');
 
@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, '../Frontend')));
 
 //SignUp routes
 app.use('/user', signUpRoute);
+app.use('/dashboard', dashboardRoute);
 
 //Login routes
 
