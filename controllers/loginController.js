@@ -30,12 +30,10 @@ const userLogin = async (req, res) => {
 
         // Login successful
         return res.status(200).json({
-            message: "Login successful"
+            message: "Login successful",
+            userId: user.id,
+            userName: user.name
         });
-
-
-
-        res.status(200).json({ message: "Login successful" });
 
     } catch (error) {
         console.error("Error logging in user:", error);

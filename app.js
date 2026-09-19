@@ -16,6 +16,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../Frontend')));
 
+// Import associations
+require("./models/userAndExpensesAssociation.js");
+
 //SignUp routes
 app.use('/user', signUpRoute);
 app.use('/dashboard', dashboardRoute);
