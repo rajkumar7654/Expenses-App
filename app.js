@@ -29,7 +29,7 @@ app.use('/dashboard', dashboardRoute);
 app.use('/user', loginRoute);
 
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     });

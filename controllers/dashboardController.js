@@ -59,8 +59,61 @@ const getExpensesByUserId = async (req, res) => {
     }
 };
 
+const deleteExpense = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const expense = await Expense.destroy({
+            where: {
+                id: id,
+                UserId: req.userId
+            }
+        });
+        if(!expense) {
+            return res.status(404).json({
+                message: "Expense not found"
+            });
+        }
+        res.status(200).json(expense);
+    } catch (error) {
+        console.error("Error deleting expense:", error);
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+const updateExpense = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { amount, description, category } = req.body;
+        const expense = await Expense.update({
+            amount,
+            description,
+            category
+        }, {
+            where: {
+                id: id,
+                UserId: req.userId
+            }
+        });
+        if(!expense) {
+            return res.status(404).json({
+                message: "Expense not found"
+            });
+        }
+        res.status(200).json(expense);
+    } catch (error) {
+        console.error("Error updating expense:", error);
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     addExpense,
     getDashboard,
-    getExpensesByUserId
+    getExpensesByUserId,
+    deleteExpense,
+    updateExpense
 };
