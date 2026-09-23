@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+require('dotenv').config();
 //importing routes
 const path = require('path');
 const cors = require('cors');
@@ -28,7 +29,7 @@ app.use('/dashboard', dashboardRoute);
 app.use('/user', loginRoute);
 
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     });
