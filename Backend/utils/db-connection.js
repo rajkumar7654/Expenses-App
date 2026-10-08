@@ -1,14 +1,33 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('expensesapp', 'root', '1234', {
-    host: 'localhost',
-    dialect: 'mysql'
-});
+const sequelize = new Sequelize(
+    process.env.DB_NAME || 'expensesapp',
+    process.env.DB_USER || 'root',
+    process.env.DB_PASSWORD || '1234',
+    {
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 3306,
+        dialect: 'mysql',
+        logging: process.env.NODE_ENV === 'development' ? console.log : false,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
+    }
+);
 
 (async () => {
     try {
         await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
+        console.log('Database connection established successfully.');
+        console.log('Database Config:', {
+            host: process.env.DB_HOST || 'localhost',
+            port: process.env.DB_PORT || 3306,
+            database: process.env.DB_NAME || 'expensesapp',
+            user: process.env.DB_USER || 'root'
+        });
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }

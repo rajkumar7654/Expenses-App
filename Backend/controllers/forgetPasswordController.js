@@ -32,7 +32,7 @@ const userForgetPassword = async (req, res) => {
             isActive: true
         });
 
-        const resetUrl = `http://localhost:3000/forgetpassword/resetpassword/${forgotPasswordRequest.id}`;
+        const resetUrl = `${process.env.APP_URL || 'http://localhost:3000'}/password/resetpassword/${forgotPasswordRequest.id}`;
 
         const defaultClient = SibApiV3Sdk.ApiClient.instance;
         const apiKey = defaultClient.authentications['api-key'];
