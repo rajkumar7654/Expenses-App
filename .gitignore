@@ -1,4 +1,5 @@
 Backend/node_modules/
+node_modules/
 Backend/.env
 Backend/cert/
 *.log
@@ -7,3 +8,6 @@ Backend/cert/
 Thumbs.db
 
 .vscode/
+
+npm-debug.log
+.env
